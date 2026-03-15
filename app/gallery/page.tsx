@@ -22,7 +22,6 @@ export default function GalleryPage() {
           
           <RowsPhotoAlbum
             photos={photos}
-            layout="rows"
             targetRowHeight={280}
             onClick={({ index }) => {
               setPhotoIndex(index);

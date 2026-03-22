@@ -224,56 +224,93 @@ export default function MapPage() {
         >
           <NavigationControl position="bottom-right" />
 
+
           {/* Clusters and pins */}
           {clusters.map((cluster, i) => {
             const [lng, lat] = cluster.geometry.coordinates;
             const isCluster = cluster.properties.cluster;
             const count = cluster.properties.point_count;
 
-            return (
-              <Marker key={i} longitude={lng} latitude={lat} anchor="center">
-                {isCluster ? (
+            if (isCluster) {
+              // Get first photo in cluster for thumbnail
+              const leaves = superclusterRef.current!.getLeaves(cluster.properties.cluster_id, 1);
+              const previewPhoto = leaves.length > 0
+                ? geoPhotos.find(p => p.id === leaves[0].properties.photoId)
+                : null;
+
+              return (
+                <Marker key={i} longitude={lng} latitude={lat} anchor="center">
                   <div
-                    className="relative cursor-pointer"
+                    className="relative cursor-pointer group"
                     onMouseEnter={e => handleClusterHover(cluster, e)}
                     onMouseMove={handleClusterHoverMove}
                     onMouseLeave={() => setHoveredCluster(null)}
                     onClick={() => openClusterLightbox(cluster)}
                   >
-                    {/* Outer ring */}
+                    {/* Cluster thumbnail with count badge */}
                     <div
-                      className="rounded-full bg-white/30 border-2 border-white flex items-center justify-center"
+                      className="rounded-full border-2 border-white overflow-hidden transition-transform group-hover:scale-110"
                       style={{
-                        width: Math.min(20 + count * 3, 56),
-                        height: Math.min(20 + count * 3, 56),
+                        width: 48,
+                        height: 48,
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.3)',
                       }}
                     >
-                      {/* Inner circle */}
-                      <div
-                        className="rounded-full bg-white flex items-center justify-center shadow-lg"
-                        style={{
-                          width: Math.min(14 + count * 2, 44),
-                          height: Math.min(14 + count * 2, 44),
-                        }}
-                      >
-                        <span className="text-xs font-bold text-gray-900">{count}</span>
-                      </div>
+                      {previewPhoto ? (
+                        <img
+                          src={previewPhoto.src}
+                          alt=""
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gray-400" />
+                      )}
+                    </div>
+                    {/* Count badge */}
+                    <div
+                      className="absolute -top-1.5 -right-1.5 bg-gray-900 text-white text-xs font-bold rounded-full flex items-center justify-center border-2 border-white"
+                      style={{ width: 22, height: 22, boxShadow: '0 1px 4px rgba(0,0,0,0.4)' }}
+                    >
+                      {count}
                     </div>
                   </div>
-                ) : (
+                </Marker>
+              );
+            }
+
+            // Single pin
+            const photo = geoPhotos.find(p => p.id === cluster.properties.photoId);
+            if (!photo) return null;
+
+            return (
+              <Marker key={i} longitude={lng} latitude={lat} anchor="center">
+                <div
+                  className="relative cursor-pointer group"
+                  onMouseEnter={e => handleClusterHover(cluster, e)}
+                  onMouseMove={handleClusterHoverMove}
+                  onMouseLeave={() => setHoveredCluster(null)}
+                  onClick={() => openClusterLightbox(cluster)}
+                >
                   <div
-                    className="cursor-pointer"
-                    onMouseEnter={e => handleClusterHover(cluster, e)}
-                    onMouseMove={handleClusterHoverMove}
-                    onMouseLeave={() => setHoveredCluster(null)}
-                    onClick={() => openClusterLightbox(cluster)}
+                    className="rounded-full border-2 border-white overflow-hidden transition-transform group-hover:scale-110"
+                    style={{
+                      width: 40,
+                      height: 40,
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.3)',
+                    }}
                   >
-                    <div className="w-4 h-4 rounded-full bg-white border-2 border-gray-900 shadow-lg hover:scale-125 transition-transform" />
+                    <img
+                      src={photo.src}
+                      alt=""
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                )}
+                </div>
               </Marker>
             );
           })}
+
+
         </Map>
 
         {/* Satellite / Street toggle */}

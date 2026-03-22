@@ -142,8 +142,8 @@ export default function GalleryPage() {
           {/* Header */}
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 lg:gap-8 mb-12">
             <div className="flex flex-col items-center lg:items-start gap-2">
-              <h1 className="text-3xl md:text-5xl font-bold text-gray-900">Gallery</h1>
-              <div className="text-sm text-gray-500 text-center lg:text-left">
+              <h1 className="text-2xl font-light tracking-[0.3em] uppercase text-gray-900">Moments</h1>              
+            <div className="text-sm text-gray-500 text-center lg:text-left">
                 Showing {filteredPhotos.length} photos
                 {selectedTags.length > 0 && ` · ${selectedTags.join(', ')}`}
               </div>
@@ -354,7 +354,6 @@ export default function GalleryPage() {
             </div>
           )}
 
-          {/* Photo Grid */}
           <RowsPhotoAlbum
             photos={filteredPhotos}
             targetRowHeight={300}

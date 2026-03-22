@@ -14,31 +14,31 @@ export default function HomePage() {
 
       {/* Overlay content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-white px-6">
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 text-center">
+        <h1 className="text-3xl md:text-4xl font-light tracking-[0.4em] uppercase mb-4 text-center">
           Connor Halford
         </h1>
-        <p className="text-lg md:text-xl text-gray-200 mb-10 text-center max-w-xl">
-          Photography from the places and moments that matter most.
+        <p className="text-xs md:text-sm tracking-[0.2em] uppercase text-white/60 mb-12 text-center">
+          Photography from the places and moments that matter most
         </p>
 
-        <div className="flex flex-col md:flex-row gap-6">
+        <div className="flex flex-col md:flex-row gap-4">
           <a
             href="/gallery"
-            className="px-8 py-3 border border-white/70 hover:border-white text-lg tracking-wide uppercase text-center hover:bg-white hover:text-black transition-colors"
+            className="px-10 py-4 border border-white/70 hover:border-white text-xs tracking-[0.2em] uppercase text-center hover:bg-white hover:text-black transition-colors"
           >
-            Gallery
+            Moments
           </a>
           <a
             href="/map"
-            className="px-8 py-3 border border-white/70 hover:border-white text-lg tracking-wide uppercase text-center hover:bg-white hover:text-black transition-colors"
+            className="px-10 py-4 border border-white/70 hover:border-white text-xs tracking-[0.2em] uppercase text-center hover:bg-white hover:text-black transition-colors"
           >
-            Map
+            Places
           </a>
           <a
             href="/about"
-            className="px-8 py-3 border border-white/70 hover:border-white text-lg tracking-wide uppercase text-center hover:bg-white hover:text-black transition-colors"
+            className="px-10 py-4 border border-white/70 hover:border-white text-xs tracking-[0.2em] uppercase text-center hover:bg-white hover:text-black transition-colors"
           >
-            About
+            Person
           </a>
         </div>
       </div>

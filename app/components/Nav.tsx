@@ -7,26 +7,26 @@ export default function Nav() {
   const pathname = usePathname();
 
   const links = [
-    { href: '/gallery', label: 'Gallery' },
-    { href: '/map', label: 'Map' },
-    { href: '/about', label: 'About' },
-  ];
+  { href: '/gallery', label: 'Moments' },
+  { href: '/map', label: 'Places' },
+  { href: '/about', label: 'Person' },
+];
 
   return (
     <nav className="w-full border-b border-gray-200 bg-white">
-      <div className="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold tracking-tight text-gray-900">
+      <div className="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+        <Link href="/" className="text-sm font-light tracking-[0.25em] uppercase text-gray-900">
           Connor Halford
         </Link>
-        <div className="flex space-x-10 text-base">
+        <div className="flex space-x-10">
           {links.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className={`transition-colors ${
+              className={`text-xs tracking-[0.2em] uppercase transition-colors ${
                 pathname === href
-                  ? 'text-gray-900 font-semibold border-b-2 border-gray-900 pb-0.5'
-                  : 'text-gray-500 hover:text-gray-900'
+                  ? 'text-gray-900 font-medium border-b border-gray-900 pb-0.5'
+                  : 'text-gray-400 hover:text-gray-900'
               }`}
             >
               {label}
@@ -37,4 +37,3 @@ export default function Nav() {
     </nav>
   );
 }
-

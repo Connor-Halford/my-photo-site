@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  output: "export",
+  transpilePackages: ['react-map-gl', 'mapbox-gl'],
 };
 
 export default nextConfig;

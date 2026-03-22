@@ -443,12 +443,18 @@ export default function GalleryPage() {
                         {currentPhoto.caption}
                       </h2>
                     )}
-                    {currentPhoto.location && (
+                  {currentPhoto.location && (
                       <div className="flex items-start gap-3">
                         <span className="text-lg mt-0.5">📍</span>
                         <div>
                           <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-0.5">Location</div>
-                          <div className="text-sm font-semibold text-gray-900 leading-snug">{currentPhoto.location}</div>
+                          {currentPhoto.lat && currentPhoto.lng ? (
+                            <a href={`/map?lat=${currentPhoto.lat}&lng=${currentPhoto.lng}&zoom=10`} className="text-sm font-semibold text-gray-900 leading-snug hover:text-blue-600 underline underline-offset-2 transition-colors cursor-pointer">
+                              {currentPhoto.location}
+                            </a>
+                          ) : (
+                            <div className="text-sm font-semibold text-gray-900 leading-snug">{currentPhoto.location}</div>
+                          )}
                         </div>
                       </div>
                     )}

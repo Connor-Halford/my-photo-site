@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 text-gray-900">
+    <div className="flex flex-col min-h-screen bg-white text-gray-900">
       <Nav />
       <main className="flex-1">
         <section className="max-w-3xl mx-auto py-16 px-8">

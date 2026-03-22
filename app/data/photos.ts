@@ -23,8 +23,8 @@ export const photos: Photo[] = [
     caption: 'Vicunas at base of volcano', // TODO: add caption
   },
   {
-    id: 'img-6652-copy',
-    src: '/images/IMG_6652 copy.jpg',
+    id: 'img-6652',
+    src: '/images/IMG_6652.jpg',
     width: 4752,
     height: 3168,
     location: 'Iceland', // TODO: add location
@@ -33,8 +33,8 @@ export const photos: Photo[] = [
     caption: 'Black sand beach', // TODO: add caption
   },
    {
-    id: 'photo1',
-    src: '/images/photo1.jpg',
+    id: 'img-7525',
+    src: '/images/IMG_7525.jpg',
     width: 3168,
     height: 4752,
     location: 'Torres del Paine National Park, Chile', // TODO: add location
@@ -43,8 +43,8 @@ export const photos: Photo[] = [
     caption: 'Waves below Los Cuernos', // TODO: add caption
   },
   {
-    id: 'photo5',
-    src: '/images/photo5.jpg',
+    id: 'img-5989',
+    src: '/images/IMG_5989.jpg',
     width: 4752,
     height: 3168,
     location: 'Ohio, USA', // TODO: add location
@@ -114,7 +114,7 @@ export const photos: Photo[] = [
   },
  {
     id: 'img-6292-1',
-    src: '/images/IMG_6292 1.jpg',
+    src: '/images/IMG_6292.jpg',
     width: 4752,
     height: 3168,
     location: 'Ohio, USA', // TODO: add location
@@ -123,8 +123,8 @@ export const photos: Photo[] = [
     caption: 'Northern lights in Ohio', // TODO: add caption
   },
   {
-    id: 'photo2',
-    src: '/images/photo2.jpg',
+    id: 'img-6385',
+    src: '/images/IMG_6385.jpg',
     width: 4752,
     height: 3168,
     location: 'Rome, Italy', // TODO: add location
@@ -173,5 +173,5 @@ export const photos: Photo[] = [
     tags: ['nature', 'mountains', 'desert', 'landscape'], // TODO: review tags
     caption: 'Colorful minerals', // TODO: add caption
   },
-  
+
 ];

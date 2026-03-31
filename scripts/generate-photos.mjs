@@ -85,7 +85,7 @@ function formatExifDate(date) {
 async function main() {
   const existingIds = await getExistingIds();
 
-  const EXCLUDE = ['landing.jpg'];
+  const EXCLUDE = [];
   const files = (await readdir(IMAGES_DIR))
     .filter(f => /\.(jpe?g|png)$/i.test(f) && !EXCLUDE.includes(f));
 

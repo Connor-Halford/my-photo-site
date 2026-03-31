@@ -72,18 +72,6 @@ export const photos: Photo[] = [
     lat: 64.050004557644, 
     lng: -16.180477529077205
   },
- {
-    id: 'img-6781',
-    src: '/images/IMG_6781.jpg',
-    width: 4752,
-    height: 3168,
-    location: 'Diamond Beach, Iceland', // TODO: add location
-    date: '2024-07',
-    tags: ['nature', 'mountains', 'landscape'], // TODO: review tags
-    caption: 'Walking through foggy field', // TODO: add caption
-    lat: 64.05068372567325, 
-    lng: -16.179651343247837
-  },
   {
     id: 'img-7221',
     src: '/images/IMG_7221.jpg',
@@ -96,6 +84,19 @@ export const photos: Photo[] = [
     lat: -22.972153715607067, 
     lng: -68.16584589176945
   },
+ {
+    id: 'img-6781',
+    src: '/images/IMG_6781.jpg',
+    width: 4752,
+    height: 3168,
+    location: 'Diamond Beach, Iceland', // TODO: add location
+    date: '2024-07',
+    tags: ['nature', 'mountains', 'landscape'], // TODO: review tags
+    caption: 'Walking through foggy field', // TODO: add caption
+    lat: 64.05068372567325, 
+    lng: -16.179651343247837
+  },
+  
  {
     id: 'img-6871',
     src: '/images/IMG_6871.jpg',
@@ -121,6 +122,30 @@ export const photos: Photo[] = [
     lng: -68.3598080375904
   },
   {
+    id: 'img-7795',
+    src: '/images/IMG_7795.jpg',
+    width: 1365,
+    height: 2048,
+    location: 'Oregon, USA', // TODO: add location
+    date: '2025-05', // TODO: add date
+    tags: ['nature', 'ocean'], // TODO: review tags
+    caption: 'Tillamook Rock Lighthouse', // TODO: add caption
+    lat: 45.94232588943487, 
+    lng: -123.98801634141951, // TODO: add longitude
+  },
+ {
+    id: 'img-6292',
+    src: '/images/IMG_6292.jpg',
+    width: 4752,
+    height: 3168,
+    location: 'Ohio, USA', // TODO: add location
+    date: '2024-05',
+    tags: ['sky'], // TODO: review tags
+    caption: 'Northern lights in Ohio', // TODO: add caption
+    lat: 40.18858185151961, 
+    lng: -82.9740762693163
+  },
+  {
     id: 'img-5572',
     src: '/images/IMG_5572.jpg',
     width: 3168,
@@ -131,18 +156,6 @@ export const photos: Photo[] = [
     caption: 'A snowy peak', // TODO: add caption
     lat: 39.41862415751625, 
     lng: -106.0786840660065
-  },
- {
-    id: 'img-6292-1',
-    src: '/images/IMG_6292.jpg',
-    width: 4752,
-    height: 3168,
-    location: 'Ohio, USA', // TODO: add location
-    date: '2024-05',
-    tags: ['sky'], // TODO: review tags
-    caption: 'Northern lights in Ohio', // TODO: add caption
-    lat: 40.18858185151961, 
-    lng: -82.9740762693163
   },
   {
     id: 'img-6385',
@@ -182,6 +195,18 @@ export const photos: Photo[] = [
     lng: -68.24047957088823
   },
   {
+      id: 'landing.jpg',
+      src: '/images/landing.jpg',
+      width: 4752,
+      height: 3168,
+      location: 'Torres del Paine, Chile', // TODO: add location
+      date: '2024-09',
+      tags: ['nature', 'mountains', 'landscape'], // TODO: review tags
+      caption: 'Horses in the fields of Torres del Paine', // TODO: add caption
+      lat: -51.21689216885915, 
+      lng: -72.96992040155445
+  },
+  {
     id: 'img-6729',
     src: '/images/IMG_6729.jpg',
     width: 3168,
@@ -205,5 +230,76 @@ export const photos: Photo[] = [
     lat: -22.92423085179877, 
     lng: -67.85098231681512
   },
-
+  {
+    id: 'img-4923',
+    src: '/images/IMG_4923.jpg',
+    width: 2048,
+    height: 1365,
+    location: 'Monteverde, Costa Rica', // TODO: add location
+    date: '2024-12', 
+    tags: ['nature', 'wildlife'], 
+    caption: 'Hummingbird among verbena flowers', // TODO: add caption
+    lat: 10.307137553343512, 
+    lng: -84.80511673168473, 
+  },
+  {
+    id: 'img-5058',
+    src: '/images/IMG_5058.jpg',
+    width: 2048,
+    height: 1365,
+    location: 'Arches National Park, USA', // TODO: add location
+    date: '2023-03', // TODO: add date
+    tags: ['nature', 'landscape', 'redrocks'], // TODO: review tags
+    caption: 'Delicate Arch at sunrise', // TODO: add caption
+    lat: 38.74407006460052, 
+    lng: -109.50091857592442, // TODO: add longitude
+  },
+  {
+    id: 'img-6461',
+    src: '/images/IMG_6461.jpg',
+    width: 1365,
+    height: 2048,
+    location: 'Montreaux, Switzerland', // TODO: add location
+    date: '2024-06', // TODO: add date
+    tags: ['nature', 'landscape', 'mountains'], // TODO: review tags
+    caption: 'Hangliders from Dent de Jaman', // TODO: add caption
+    lat: 46.44497977547233, 
+    lng: 6.974856694619266,
+  },
+  {
+    id: 'img-6915',
+    src: '/images/IMG_6915.jpg',
+    width: 1365,
+    height: 2048,
+    location: 'Cuyahoga Valley National Park, USA', // TODO: add location
+    date: '2024-08', // TODO: add date
+    tags: ['nature', 'architecture'], // TODO: review tags
+    caption: 'Station Road Bridge', // TODO: add caption
+    lat: 41.323807370605174, 
+    lng: -81.58704265711836, // TODO: add longitude
+  },
+  {
+    id: 'img-7603',
+    src: '/images/IMG_7603.jpg',
+    width: 1365,
+    height: 2048,
+    location: 'Ohio, USA', // TODO: add location
+    date: '2024-12', // TODO: add date
+    tags: ['urban'], // TODO: review tags
+    caption: 'Lights in a tree', // TODO: add caption
+    lat: 41.246409659694976, 
+    lng: -81.43848428339577, // TODO: add longitude
+  },
+  {
+    id: 'img-7939',
+    src: '/images/IMG_7939.jpg',
+    width: 1365,
+    height: 2048,
+    location: 'Hawaii, USA', // TODO: add location
+    date: '2025-06', // TODO: add date
+    tags: ['nature', 'waterfall'], // TODO: review tags
+    caption: 'Waterfall in Waimea Canyon', // TODO: add caption
+    lat: 22.101632233905196, 
+    lng: -159.67721767800936, // TODO: add longitude
+  },
 ];

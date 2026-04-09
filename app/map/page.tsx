@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import HomeChevron from '../components/HomeChevron';
 import Map, { Marker, NavigationControl } from 'react-map-gl/mapbox';import Supercluster from 'supercluster';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { photos } from '../data/photos';
-import Nav from '../components/Nav';
 
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN!;
 
@@ -207,7 +207,13 @@ export default function MapPage() {
 
   return (
     <div className="flex flex-col h-screen bg-white">
-      <Nav />
+
+      {/* Header */}
+      <div className="flex items-center gap-4 px-8 pt-6 pb-4 flex-shrink-0">
+        <HomeChevron />
+        <h1 className="text-2xl font-light tracking-[0.3em] uppercase text-gray-900">Places</h1>
+      </div>
+
       <div className="flex-1 relative">
 
         {/* Map */}

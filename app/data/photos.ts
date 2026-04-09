@@ -198,7 +198,7 @@ export const photos: Photo[] = [
       id: 'landing.jpg',
       src: '/images/landing.jpg',
       width: 4752,
-      height: 3168,
+      height: 2673,
       location: 'Torres del Paine, Chile', // TODO: add location
       date: '2024-09',
       tags: ['nature', 'mountains', 'landscape'], // TODO: review tags

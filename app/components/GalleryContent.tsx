@@ -88,7 +88,6 @@ export default function GalleryContent() {
 
   const handlePhotoClick = useCallback(({ index }: { index: number }) => {
     setPhotoIndex(index);
-    setInfoVisible(true);
     setOpen(true);
   }, []);
 
@@ -128,9 +127,10 @@ export default function GalleryContent() {
   };
 
   return (
-    <section className="max-w-7xl mx-auto pt-6 pb-12 px-8">
+    <section className="pt-6 pb-12">
 
-      {/* Header */}
+      {/* Header — constrained width, unchanged */}
+      <div className="max-w-7xl mx-auto px-8">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 lg:gap-8 mb-12">
         <div className="flex items-center gap-4">
           <HomeChevron />
@@ -347,13 +347,18 @@ export default function GalleryContent() {
           ))}
         </div>
       )}
+      </div>{/* end constrained header */}
 
+      {/* Photo grid — full width, outer padding matches inter-photo spacing */}
+      <div className="px-4">
       <RowsPhotoAlbum
         photos={filteredPhotos}
-        targetRowHeight={300}
-        rowConstraints={{ minPhotos: 1, maxPhotos: 4, singleRowMaxHeight: 400 }}
+        targetRowHeight={500}
+        rowConstraints={{ minPhotos: 1, maxPhotos: 3, singleRowMaxHeight: 650 }}
+        spacing={16}
         onClick={handlePhotoClick}
       />
+      </div>{/* end photo grid */}
 
       {/* Empty state */}
       {filteredPhotos.length === 0 && (
@@ -382,105 +387,114 @@ export default function GalleryContent() {
             ×
           </button>
 
-          <button
-            onClick={() => setInfoVisible(v => !v)}
-            className="absolute bottom-5 right-5 z-30 flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-white text-xs font-medium transition-all"
-          >
-            {infoVisible ? (
-              <>
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                </svg>
-                Hide Info
-              </>
-            ) : (
-              <>
-                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-                Show Info
-              </>
-            )}
-          </button>
-
+          {/* Left arrow */}
           <button
             onClick={prevPhoto}
             disabled={photoIndex === 0}
-            className="absolute left-4 z-20 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 disabled:opacity-20 rounded-full text-white text-2xl transition-all"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 disabled:opacity-20 rounded-full text-white text-2xl transition-all"
           >
             ‹
           </button>
 
+          {/* Right arrow */}
           <button
             onClick={nextPhoto}
             disabled={photoIndex === totalPhotos - 1}
-            className="absolute right-4 z-20 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 disabled:opacity-20 rounded-full text-white text-2xl transition-all"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 disabled:opacity-20 rounded-full text-white text-2xl transition-all"
           >
             ›
           </button>
 
-          <div className="flex items-center justify-center gap-6 w-full h-full px-20 py-10 max-w-[1400px] mx-auto">
-            <div className="flex-1 h-full flex items-center justify-center">
+          {/* Image wrapper — padded vertically, horizontally clear of arrows */}
+          <div className="absolute inset-0 flex items-center justify-center py-12 px-20">
+            <div className="relative h-full flex items-center justify-center">
               <img
                 src={currentPhoto.src}
                 alt={currentPhoto.caption || ''}
-                className="max-h-[85vh] max-w-full object-contain"
+                className="max-h-full max-w-full object-contain"
               />
-            </div>
 
-            {infoVisible && (
-              <div className="w-64 flex-shrink-0 bg-white rounded-2xl shadow-2xl p-6 flex flex-col gap-5 self-center">
-                {currentPhoto.caption && (
-                  <h2 className="text-base font-bold text-gray-900 leading-snug">
-                    {currentPhoto.caption}
-                  </h2>
-                )}
-                {currentPhoto.location && (
-                  <div className="flex items-start gap-3">
-                    <span className="text-lg mt-0.5">📍</span>
+              {/* Info panel — anchored to bottom-right of image */}
+              {infoVisible && (
+                <div
+                  className="absolute bottom-0 right-0 w-[280px] rounded-2xl p-5 flex flex-col gap-4"
+                  style={{
+                    backdropFilter: 'blur(16px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                    background: 'rgba(0,0,0,0.6)',
+                    boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.08), 0 4px 24px rgba(0,0,0,0.4)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                  }}
+                >
+                  {currentPhoto.caption && (
+                    <h2 className="text-sm font-semibold text-white leading-snug">
+                      {currentPhoto.caption}
+                    </h2>
+                  )}
+                  {currentPhoto.location && (
+                    <div className="flex items-start gap-3">
+                      <span className="text-base mt-0.5">📍</span>
+                      <div>
+                        <div className="text-[10px] text-white/50 font-medium uppercase tracking-wide mb-0.5">Location</div>
+                        {currentPhoto.lat && currentPhoto.lng ? (
+                          <a href={`/map?lat=${currentPhoto.lat}&lng=${currentPhoto.lng}&zoom=10`} className="text-xs font-medium text-white/90 leading-snug hover:text-white underline underline-offset-2 transition-colors cursor-pointer">
+                            {currentPhoto.location}
+                          </a>
+                        ) : (
+                          <div className="text-xs font-medium text-white/90 leading-snug">{currentPhoto.location}</div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  {currentPhoto.date && (
+                    <div className="flex items-start gap-3">
+                      <span className="text-base mt-0.5">📅</span>
+                      <div>
+                        <div className="text-[10px] text-white/50 font-medium uppercase tracking-wide mb-0.5">Date</div>
+                        <div className="text-xs font-medium text-white/90">{formatDate(currentPhoto.date)}</div>
+                      </div>
+                    </div>
+                  )}
+                  {currentPhoto.tags && currentPhoto.tags.length > 0 && (
                     <div>
-                      <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-0.5">Location</div>
-                      {currentPhoto.lat && currentPhoto.lng ? (
-                        <a href={`/map?lat=${currentPhoto.lat}&lng=${currentPhoto.lng}&zoom=10`} className="text-sm font-semibold text-gray-900 leading-snug hover:text-blue-600 underline underline-offset-2 transition-colors cursor-pointer">
-                          {currentPhoto.location}
-                        </a>
-                      ) : (
-                        <div className="text-sm font-semibold text-gray-900 leading-snug">{currentPhoto.location}</div>
-                      )}
+                      <div className="text-[10px] text-white/50 font-medium uppercase tracking-wide mb-2">Tags</div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {currentPhoto.tags.map(tag => (
+                          <button
+                            key={tag}
+                            onClick={() => { toggleTag(tag); setOpen(false); }}
+                            className="px-2.5 py-1 bg-white/10 hover:bg-white/20 rounded-lg text-xs font-medium text-white/80 hover:text-white capitalize transition-colors"
+                          >
+                            {tag}
+                          </button>
+                        ))}
+                      </div>
                     </div>
+                  )}
+                  <div className="text-[10px] text-white/40 text-center pt-1">
+                    {photoIndex + 1} / {totalPhotos}
                   </div>
-                )}
-                {currentPhoto.date && (
-                  <div className="flex items-start gap-3">
-                    <span className="text-lg mt-0.5">📅</span>
-                    <div>
-                      <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-0.5">Date</div>
-                      <div className="text-sm font-semibold text-gray-900">{formatDate(currentPhoto.date)}</div>
-                    </div>
-                  </div>
-                )}
-                {currentPhoto.tags && currentPhoto.tags.length > 0 && (
-                  <div>
-                    <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-2">Tags</div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {currentPhoto.tags.map(tag => (
-                        <button
-                          key={tag}
-                          onClick={() => { toggleTag(tag); setOpen(false); }}
-                          className="px-2.5 py-1 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs font-medium text-gray-700 capitalize transition-colors"
-                        >
-                          {tag}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                <div className="text-xs text-gray-400 text-center pt-1">
-                  {photoIndex + 1} / {totalPhotos}
                 </div>
-              </div>
-            )}
+              )}
+
+              {/* Eye toggle — always anchored to bottom-right of image */}
+              <button
+                onClick={() => setInfoVisible(v => !v)}
+                aria-label={infoVisible ? 'Hide info' : 'Show info'}
+                className="absolute bottom-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-black/60 backdrop-blur-md text-white/70 hover:text-white transition-all"
+              >
+                {infoVisible ? (
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                  </svg>
+                ) : (
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -19,7 +19,7 @@ export const photos: Photo[] = [
     height: 4277,
     location: 'Laguna Miscanti, Chile', // TODO: add location
     date: '2024-09',
-    tags: ['nature', 'mountaints', 'desert', 'wildlife'], // TODO: review tags
+    tags: ['nature', 'mountains', 'desert', 'wildlife'], // TODO: review tags
     caption: 'Vicunas at base of volcano', // TODO: add caption
     lat: -23.735588533340124, 
     lng: -67.7958398053538
@@ -195,8 +195,8 @@ export const photos: Photo[] = [
     lng: -68.24047957088823
   },
   {
-      id: 'landing.jpg',
-      src: '/images/landing.jpg',
+      id: 'img-7394',
+      src: '/images/IMG_7394.jpg',
       width: 4752,
       height: 2673,
       location: 'Torres del Paine, Chile', // TODO: add location

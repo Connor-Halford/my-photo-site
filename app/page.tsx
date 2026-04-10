@@ -1,12 +1,22 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
+import { photos } from './data/photos';
+
+const landscapePhotos = photos.filter(p => p.width > p.height);
 
 export default function HomePage() {
+  const [hero] = useState(
+    () => landscapePhotos[Math.floor(Math.random() * landscapePhotos.length)]
+  );
+
   return (
     <main className="min-h-screen relative">
       <div className="absolute inset-0">
         <img
-          src="/images/landing.jpg"
-          alt="Connor Halford photography"
+          src={hero.src}
+          alt={hero.caption || 'Connor Halford photography'}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40" />

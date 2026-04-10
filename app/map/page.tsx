@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import HomeChevron from '../components/HomeChevron';
-import Map, { Marker, NavigationControl } from 'react-map-gl/mapbox';import Supercluster from 'supercluster';
+import Map, { Marker, NavigationControl } from 'react-map-gl/mapbox';
+import Supercluster from 'supercluster';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { photos } from '../data/photos';
 
@@ -60,7 +61,7 @@ export default function MapPage() {
 
   // Initialize supercluster
   useEffect(() => {
-    superclusterRef.current = new Supercluster({ radius: 60, maxZoom: 16 });
+    superclusterRef.current = new Supercluster({ radius: 30, maxZoom: 16 });
     superclusterRef.current.load(points);
     updateClusters();
   }, [points]);

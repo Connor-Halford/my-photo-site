@@ -236,7 +236,7 @@ export const photos: Photo[] = [
     width: 2048,
     height: 1365,
     location: 'Monteverde, Costa Rica', // TODO: add location
-    date: '2024-12', 
+    date: '2022-12', 
     tags: ['nature', 'wildlife'], 
     caption: 'Hummingbird among verbena flowers', // TODO: add caption
     lat: 10.307137553343512, 

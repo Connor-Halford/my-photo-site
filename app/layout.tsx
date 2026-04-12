@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import LayoutTransition from './components/LayoutTransition'
-import PageChevrons from './components/PageChevrons'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -20,7 +19,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${inter.className} bg-white antialiased`}>
         <LayoutTransition>{children}</LayoutTransition>
-        <PageChevrons />
       </body>
     </html>
   );

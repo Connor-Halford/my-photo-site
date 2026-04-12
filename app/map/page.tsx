@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import HomeChevron from '../components/HomeChevron';
+import TopNav from '../components/TopNav';
+import Lightbox from '../components/Lightbox';
 import Map, { Marker, NavigationControl } from 'react-map-gl/mapbox';
 import Supercluster from 'supercluster';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -38,7 +39,6 @@ export default function MapPage() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxPhotos, setLightboxPhotos] = useState<typeof photos>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [infoVisible, setInfoVisible] = useState(true);
 
   const mapRef = useRef<any>(null);
   const superclusterRef = useRef<Supercluster | null>(null);
@@ -104,7 +104,6 @@ export default function MapPage() {
       if (photo) {
         setLightboxPhotos([photo]);
         setLightboxIndex(0);
-        setInfoVisible(true);
         setLightboxOpen(true);
       }
     }
@@ -149,7 +148,6 @@ export default function MapPage() {
       if (photo) {
         setLightboxPhotos([photo]);
         setLightboxIndex(0);
-        setInfoVisible(true);
         setLightboxOpen(true);
       }
     }
@@ -166,30 +164,16 @@ export default function MapPage() {
         .filter(Boolean) as typeof photos;
       setLightboxPhotos(clusterPhotos);
       setLightboxIndex(0);
-      setInfoVisible(true);
       setLightboxOpen(true);
     } else {
       const photo = geoPhotos.find(p => p.id === cluster.properties.photoId);
       if (photo) {
         setLightboxPhotos([photo]);
         setLightboxIndex(0);
-        setInfoVisible(true);
         setLightboxOpen(true);
       }
     }
   }, [geoPhotos]);
-
-  // Keyboard nav in lightbox
-  useEffect(() => {
-    if (!lightboxOpen) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') setLightboxIndex(i => Math.max(0, i - 1));
-      if (e.key === 'ArrowRight') setLightboxIndex(i => Math.min(lightboxPhotos.length - 1, i + 1));
-      if (e.key === 'Escape') setLightboxOpen(false);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen, lightboxPhotos.length]);
 
   // Fly to location from URL params
   useEffect(() => {
@@ -204,15 +188,12 @@ export default function MapPage() {
     }
   }, []);
 
-  const currentPhoto = lightboxPhotos[lightboxIndex];
-
   return (
     <div className="flex flex-col h-screen bg-white">
 
       {/* Header */}
-      <div className="flex items-center gap-4 px-8 pt-6 pb-4 flex-shrink-0">
-        <HomeChevron />
-        <h1 className="text-2xl font-light tracking-[0.3em] uppercase text-gray-900">Places</h1>
+      <div className="px-8 pt-6 pb-4 flex-shrink-0">
+        <TopNav title="Places" />
       </div>
 
       <div className="flex-1 relative">
@@ -376,97 +357,15 @@ export default function MapPage() {
         )}
 
         {/* Lightbox */}
-        {lightboxOpen && currentPhoto && (
-          <div
-            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center lightbox-fade"
-            onClick={e => { if (e.target === e.currentTarget) setLightboxOpen(false); }}
-          >
-            <button
-              onClick={() => setLightboxOpen(false)}
-              className="absolute top-5 right-5 z-30 w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white text-xl transition-all"
-            >
-              ×
-            </button>
-
-            <button
-              onClick={() => setInfoVisible(v => !v)}
-              className="absolute bottom-5 right-5 z-30 flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-full text-white text-xs font-medium transition-all"
-            >
-              {infoVisible ? 'Hide Info' : 'Show Info'}
-            </button>
-
-            <button
-              onClick={() => setLightboxIndex(i => Math.max(0, i - 1))}
-              disabled={lightboxIndex === 0}
-              className="absolute left-4 z-20 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 disabled:opacity-20 rounded-full text-white text-2xl transition-all"
-            >
-              ‹
-            </button>
-
-            <button
-              onClick={() => setLightboxIndex(i => Math.min(lightboxPhotos.length - 1, i + 1))}
-              disabled={lightboxIndex === lightboxPhotos.length - 1}
-              className="absolute right-4 z-20 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 disabled:opacity-20 rounded-full text-white text-2xl transition-all"
-            >
-              ›
-            </button>
-
-            <div className="flex items-center justify-center gap-6 w-full h-full px-20 py-10 max-w-[1400px] mx-auto">
-              <div className="flex-1 h-full flex items-center justify-center">
-                <img
-                  src={currentPhoto.src}
-                  alt={currentPhoto.caption || ''}
-                  className="max-h-[85vh] max-w-full object-contain"
-                />
-              </div>
-
-              {infoVisible && (
-                <div className="w-64 flex-shrink-0 bg-white rounded-2xl shadow-2xl p-6 flex flex-col gap-5 self-center">
-                  {currentPhoto.caption && (
-                    <h2 className="text-base font-bold text-gray-900 leading-snug">
-                      {currentPhoto.caption}
-                    </h2>
-                  )}
-                  {currentPhoto.location && (
-                    <div className="flex items-start gap-3">
-                      <span className="text-lg mt-0.5">📍</span>
-                      <div>
-                        <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-0.5">Location</div>
-                        <div className="text-sm font-semibold text-gray-900 leading-snug">{currentPhoto.location}</div>
-                      </div>
-                    </div>
-                  )}
-                  {currentPhoto.date && (
-                    <div className="flex items-start gap-3">
-                      <span className="text-lg mt-0.5">📅</span>
-                      <div>
-                        <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-0.5">Date</div>
-                        <div className="text-sm font-semibold text-gray-900">{formatDate(currentPhoto.date)}</div>
-                      </div>
-                    </div>
-                  )}
-                  {currentPhoto.tags && currentPhoto.tags.length > 0 && (
-                    <div>
-                      <div className="text-xs text-gray-500 font-medium uppercase tracking-wide mb-2">Tags</div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {currentPhoto.tags.map(tag => (
-                          <span
-                            key={tag}
-                            className="px-2.5 py-1 bg-gray-100 rounded-lg text-xs font-medium text-gray-700 capitalize"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  <div className="text-xs text-gray-400 text-center pt-1">
-                    {lightboxIndex + 1} / {lightboxPhotos.length}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+        {lightboxOpen && (
+          <Lightbox
+            photos={lightboxPhotos}
+            currentIndex={lightboxIndex}
+            onClose={() => setLightboxOpen(false)}
+            onNext={() => setLightboxIndex(i => Math.min(lightboxPhotos.length - 1, i + 1))}
+            onPrev={() => setLightboxIndex(i => Math.max(0, i - 1))}
+            onIndexChange={setLightboxIndex}
+          />
         )}
       </div>
     </div>

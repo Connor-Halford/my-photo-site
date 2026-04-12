@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import HomeChevron from '../components/HomeChevron';
+import TopNav from '../components/TopNav';
 import Footer from "../components/Footer";
 
 export default function AboutPage() {
@@ -32,13 +32,12 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col min-h-screen bg-white text-gray-900">
       <main className="flex-1">
-        <section className="max-w-7xl mx-auto pt-6 pb-12 px-8">
+        {/* Header */}
+        <div className="px-8 pt-6 pb-4">
+          <TopNav title="Person" />
+        </div>
 
-          {/* Header */}
-          <div className="flex items-center gap-4 mb-12">
-            <HomeChevron />
-            <h1 className="text-2xl font-light tracking-[0.3em] uppercase text-gray-900">Person</h1>
-          </div>
+        <section className="max-w-7xl mx-auto pb-12 px-8 mt-8">
 
           {/* Main content: photo left, text + contact right */}
           <div className="flex flex-col lg:flex-row gap-16">

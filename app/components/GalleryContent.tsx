@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useMemo, useCallback, useEffect } from 'react';
-import HomeChevron from './HomeChevron';
+import { useState, useMemo, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import { NavButton } from './TopNav';
+import Lightbox from './Lightbox';
 import { RowsPhotoAlbum } from 'react-photo-album';
 import 'react-photo-album/rows.css';
 import { photos } from '../data/photos';
@@ -15,13 +17,12 @@ function formatDate(dateStr: string) {
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 export default function GalleryContent() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [showTagsDropdown, setShowTagsDropdown] = useState(false);
   const [showDateDropdown, setShowDateDropdown] = useState(false);
-  const [infoVisible, setInfoVisible] = useState(true);
-
   const [dateMode, setDateMode] = useState<'year' | 'range'>('year');
   const [selectedYears, setSelectedYears] = useState<number[]>([]);
   const [rangeStart, setRangeStart] = useState<string>('');
@@ -97,26 +98,7 @@ export default function GalleryContent() {
     );
   }, []);
 
-  const currentPhoto = filteredPhotos[photoIndex];
-  const totalPhotos = filteredPhotos.length;
 
-  const prevPhoto = () => setPhotoIndex(prev => Math.max(0, prev - 1));
-  const nextPhoto = () => setPhotoIndex(prev => Math.min(totalPhotos - 1, prev + 1));
-
-  const closeLightbox = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) setOpen(false);
-  };
-
-  useEffect(() => {
-    if (!open) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') prevPhoto();
-      if (e.key === 'ArrowRight') nextPhoto();
-      if (e.key === 'Escape') setOpen(false);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [open, photoIndex, totalPhotos]);
 
   const dateBtnLabel = () => {
     if (!hasDateFilter) return 'All Dates';
@@ -129,22 +111,27 @@ export default function GalleryContent() {
   return (
     <section className="pt-6 pb-12">
 
-      {/* Header — constrained width, unchanged */}
-      <div className="max-w-7xl mx-auto px-8">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 lg:gap-8 mb-12">
-        <div className="flex items-center gap-4">
-          <HomeChevron />
-          <div className="flex flex-col gap-1">
-            <h1 className="text-2xl font-light tracking-[0.3em] uppercase text-gray-900">Moments</h1>
-            <div className="text-sm text-gray-500">
-              Showing {filteredPhotos.length} photos
-              {selectedTags.length > 0 && ` · ${selectedTags.join(', ')}`}
+      {/* Header */}
+      <div className="px-8 pb-4">
+      <div className="flex flex-col gap-4 mb-8">
+        {/* Nav row — always single line */}
+        <div className="flex items-start justify-between">
+          <div className="flex items-start gap-4">
+            <NavButton onClick={() => router.push('/map')} ariaLabel="Previous page" icon="left" />
+            <NavButton href="/" ariaLabel="Return to home" icon="up" />
+            <div className="flex flex-col gap-1 mt-1">
+              <h1 className="text-2xl font-light tracking-[0.3em] uppercase text-gray-900">Moments</h1>
+              <div className="text-sm text-gray-500">
+                Showing {filteredPhotos.length} photos
+                {selectedTags.length > 0 && ` · ${selectedTags.join(', ')}`}
+              </div>
             </div>
           </div>
+          <NavButton onClick={() => router.push('/about')} ariaLabel="Next page" icon="right" />
         </div>
 
-        {/* Filters row */}
-        <div className="flex items-center gap-3">
+        {/* Filters row — wraps when narrow */}
+        <div className="flex flex-wrap items-center gap-3">
 
           {/* Date Filter */}
           <div className="relative">
@@ -159,7 +146,7 @@ export default function GalleryContent() {
             </button>
 
             {showDateDropdown && (
-              <div className="absolute top-full right-0 mt-2 w-80 bg-white border border-gray-200 rounded-2xl shadow-xl z-50">
+              <div className="absolute top-full right-0 mt-2 w-80 max-w-[calc(100vw-2rem)] bg-white border border-gray-200 rounded-2xl shadow-xl z-50">
 
                 {/* Mode toggle */}
                 <div className="p-4 border-b border-gray-100">
@@ -374,129 +361,16 @@ export default function GalleryContent() {
       )}
 
       {/* Lightbox */}
-      {open && currentPhoto && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center lightbox-fade"
-          onClick={closeLightbox}
-        >
-          <button
-            onClick={() => setOpen(false)}
-            className="absolute top-5 right-5 z-30 w-10 h-10 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white text-xl transition-all"
-            aria-label="Close"
-          >
-            ×
-          </button>
-
-          {/* Left arrow */}
-          <button
-            onClick={prevPhoto}
-            disabled={photoIndex === 0}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 disabled:opacity-20 rounded-full text-white text-2xl transition-all"
-          >
-            ‹
-          </button>
-
-          {/* Right arrow */}
-          <button
-            onClick={nextPhoto}
-            disabled={photoIndex === totalPhotos - 1}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 disabled:opacity-20 rounded-full text-white text-2xl transition-all"
-          >
-            ›
-          </button>
-
-          {/* Image wrapper — padded vertically, horizontally clear of arrows */}
-          <div className="absolute inset-0 flex items-center justify-center py-12 px-20">
-            <div className="relative h-full flex items-center justify-center">
-              <img
-                src={currentPhoto.src}
-                alt={currentPhoto.caption || ''}
-                className="max-h-full max-w-full object-contain"
-              />
-
-              {/* Info panel — anchored to bottom-right of image */}
-              {infoVisible && (
-                <div
-                  className="absolute bottom-0 right-0 w-[280px] rounded-2xl p-5 flex flex-col gap-4"
-                  style={{
-                    backdropFilter: 'blur(16px) saturate(180%)',
-                    WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-                    background: 'rgba(0,0,0,0.6)',
-                    boxShadow: 'inset 0 1px 1px rgba(255,255,255,0.08), 0 4px 24px rgba(0,0,0,0.4)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                  }}
-                >
-                  {currentPhoto.caption && (
-                    <h2 className="text-sm font-semibold text-white leading-snug">
-                      {currentPhoto.caption}
-                    </h2>
-                  )}
-                  {currentPhoto.location && (
-                    <div className="flex items-start gap-3">
-                      <span className="text-base mt-0.5">📍</span>
-                      <div>
-                        <div className="text-[10px] text-white/50 font-medium uppercase tracking-wide mb-0.5">Location</div>
-                        {currentPhoto.lat && currentPhoto.lng ? (
-                          <a href={`/map?lat=${currentPhoto.lat}&lng=${currentPhoto.lng}&zoom=10`} className="text-xs font-medium text-white/90 leading-snug hover:text-white underline underline-offset-2 transition-colors cursor-pointer">
-                            {currentPhoto.location}
-                          </a>
-                        ) : (
-                          <div className="text-xs font-medium text-white/90 leading-snug">{currentPhoto.location}</div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                  {currentPhoto.date && (
-                    <div className="flex items-start gap-3">
-                      <span className="text-base mt-0.5">📅</span>
-                      <div>
-                        <div className="text-[10px] text-white/50 font-medium uppercase tracking-wide mb-0.5">Date</div>
-                        <div className="text-xs font-medium text-white/90">{formatDate(currentPhoto.date)}</div>
-                      </div>
-                    </div>
-                  )}
-                  {currentPhoto.tags && currentPhoto.tags.length > 0 && (
-                    <div>
-                      <div className="text-[10px] text-white/50 font-medium uppercase tracking-wide mb-2">Tags</div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {currentPhoto.tags.map(tag => (
-                          <button
-                            key={tag}
-                            onClick={() => { toggleTag(tag); setOpen(false); }}
-                            className="px-2.5 py-1 bg-white/10 hover:bg-white/20 rounded-lg text-xs font-medium text-white/80 hover:text-white capitalize transition-colors"
-                          >
-                            {tag}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  <div className="text-[10px] text-white/40 text-center pt-1">
-                    {photoIndex + 1} / {totalPhotos}
-                  </div>
-                </div>
-              )}
-
-              {/* Eye toggle — always anchored to bottom-right of image */}
-              <button
-                onClick={() => setInfoVisible(v => !v)}
-                aria-label={infoVisible ? 'Hide info' : 'Show info'}
-                className="absolute bottom-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-black/60 backdrop-blur-md text-white/70 hover:text-white transition-all"
-              >
-                {infoVisible ? (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                  </svg>
-                ) : (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
+      {open && (
+        <Lightbox
+          photos={filteredPhotos}
+          currentIndex={photoIndex}
+          onClose={() => setOpen(false)}
+          onNext={() => setPhotoIndex(i => Math.min(filteredPhotos.length - 1, i + 1))}
+          onPrev={() => setPhotoIndex(i => Math.max(0, i - 1))}
+          onIndexChange={setPhotoIndex}
+          onTagClick={tag => toggleTag(tag)}
+        />
       )}
 
     </section>

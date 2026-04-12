@@ -1,15 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+
 import Link from 'next/link';
 import { photos } from './data/photos';
+import { useState, useEffect } from 'react';
 
 const landscapePhotos = photos.filter(p => p.width > p.height);
 
 export default function HomePage() {
-  const [hero] = useState(
-    () => landscapePhotos[Math.floor(Math.random() * landscapePhotos.length)]
-  );
+  const [hero, setHero] = useState(landscapePhotos[0]);
+
+  useEffect(() => {
+    setHero(landscapePhotos[Math.floor(Math.random() * landscapePhotos.length)]);
+  }, []);
 
   return (
     <main className="min-h-screen relative">

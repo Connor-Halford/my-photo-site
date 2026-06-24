@@ -24,18 +24,7 @@ export const photos: Photo[] = [
     lat: 69.50160877496454, // TODO: add latitude
     lng: 17.60309683689257, // TODO: add longitude
   },
-  {
-    id: 'img-7297',
-    src: '/images/IMG_7297.jpg',
-    width: 2852,
-    height: 4277,
-    location: 'Laguna Miscanti, Chile', // TODO: add location
-    date: '2024-09',
-    tags: ['nature', 'mountains', 'desert', 'wildlife'], // TODO: review tags
-    caption: 'Vicunas at base of volcano', // TODO: add caption
-    lat: -23.735588533340124, 
-    lng: -67.7958398053538
-  },
+  
   {
     id: 'img-6652',
     src: '/images/IMG_6652.jpg',
@@ -83,6 +72,18 @@ export const photos: Photo[] = [
     caption: 'Total solar eclipse', // TODO: add caption
     lat: 40.353941387943316,
     lng: -83.0692040734047
+  },
+  {
+    id: 'img-7297',
+    src: '/images/IMG_7297.jpg',
+    width: 2852,
+    height: 4277,
+    location: 'Laguna Miscanti, Chile', // TODO: add location
+    date: '2024-09',
+    tags: ['nature', 'mountains', 'desert', 'wildlife'], // TODO: review tags
+    caption: 'Vicunas at base of volcano', // TODO: add caption
+    lat: -23.735588533340124, 
+    lng: -67.7958398053538
   },
   {
     id: 'img-6748',

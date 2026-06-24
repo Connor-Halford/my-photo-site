@@ -13,6 +13,18 @@ export type Photo = {
 
 export const photos: Photo[] = [
   {
+    id: 'do2a0288',
+    src: '/images/DO2A0288.jpg',
+    width: 1365,
+    height: 2048,
+    location: 'Senja, Norway', // TODO: add location
+    date: '2026-06', // TODO: add date
+    tags: ['nature', 'mountains', 'landscape'], // TODO: review tags
+    caption: 'On Top of the Fjord', // TODO: add caption
+    lat: 69.50160877496454, // TODO: add latitude
+    lng: 17.60309683689257, // TODO: add longitude
+  },
+  {
     id: 'img-7297',
     src: '/images/IMG_7297.jpg',
     width: 2852,
@@ -47,6 +59,18 @@ export const photos: Photo[] = [
     caption: 'Waves below Los Cuernos', // TODO: add caption
     lat: -51.05547622613886,
     lng: -73.0103703649912
+  },
+   {
+    id: 'do2a0517',
+    src: '/images/DO2A0517.jpg',
+    width: 1365,
+    height: 2048,
+    location: 'Lofoten, Norway', // TODO: add location
+    date: '2026-06', // TODO: add date
+    tags: ['nature', 'landscape', 'mountains'], // TODO: review tags
+    caption: 'Midnight Sun on Reinebringen', // TODO: add caption
+    lat: 67.92776039767325, // TODO: add latitude
+    lng:  13.073418959144027, // TODO: add longitude
   },
   {
     id: 'img-5989',
@@ -158,6 +182,18 @@ export const photos: Photo[] = [
     lng: -106.0786840660065
   },
   {
+    id: 'do2a0439',
+    src: '/images/DO2A0439.jpg',
+    width: 1365,
+    height: 2048,
+    location: 'Henningsvær, Norway', // TODO: add location
+    date: '2026-06', // TODO: add date
+    tags: ['architecture', 'landscape'], // TODO: review tags
+    caption: 'Henningsvær Harbor', // TODO: add caption
+    lat: 68.17109097219745,  // TODO: add latitude
+    lng: 14.22826045194709, // TODO: add longitude
+  },
+  {
     id: 'img-6385',
     src: '/images/IMG_6385.jpg',
     width: 4752,
@@ -205,6 +241,18 @@ export const photos: Photo[] = [
       caption: 'Horses in the fields of Torres del Paine', // TODO: add caption
       lat: -51.21689216885915, 
       lng: -72.96992040155445
+  },
+   {
+    id: 'do2a0448',
+    src: '/images/DO2A0448.jpg',
+    width: 1365,
+    height: 2048,
+    location: 'Henningsvær, Norway', // TODO: add location
+    date: '2026-06', // TODO: add date
+    tags: ['ocean', 'architecture'], // TODO: review tags
+    caption: 'Grass Roof', // TODO: add caption
+    lat: 68.17157976316521, // TODO: add latitude
+    lng:  14.229673589862937, // TODO: add longitude
   },
   {
     id: 'img-6729',
@@ -301,5 +349,45 @@ export const photos: Photo[] = [
     caption: 'Waterfall in Waimea Canyon', // TODO: add caption
     lat: 22.101632233905196, 
     lng: -159.67721767800936, // TODO: add longitude
+  },
+  {
+    id: 'do2a0132',
+    src: '/images/DO2A0132.jpg',
+    width: 1365,
+    height: 2048,
+    location: 'Florida, USA', // TODO: add location
+    date: '2026-05', // TODO: add date
+    tags: ['nature', 'ocean', ], // TODO: review tags
+    caption: 'Atlantic Sunrise', // TODO: add caption
+    lat: 28.128116218537603, 
+    lng: -80.57693370623178, // TODO: add longitude
+  },
+  
+  
+ 
+ 
+  {
+    id: 'do2a0552',
+    src: '/images/DO2A0552.jpg',
+    width: 1365,
+    height: 2048,
+    location: 'Odda, Norway', // TODO: add location
+    date: '2026-06', // TODO: add date
+    tags: ['waterfall', 'nature', 'rainbow'], // TODO: review tags
+    caption: 'Tjørnadalsfossen', // TODO: add caption
+    lat: 60.02784316884682,  // TODO: add latitude
+    lng: 6.538649028130602, // TODO: add longitude
+  },
+  {
+    id: 'img-5044',
+    src: '/images/IMG_5044.jpg',
+    width: 2048,
+    height: 1365,
+    location: 'Arches National Park, USA', // TODO: add location
+    date: '2023-03', // TODO: add date
+    tags: ['nature', 'landscape'], // TODO: review tags
+    caption: 'Mesas Above the Clouds', // TODO: add caption
+    lat: 38.74407006460051, 
+    lng: -109.50091857592441,
   },
 ];

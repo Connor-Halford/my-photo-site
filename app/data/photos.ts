@@ -403,18 +403,6 @@ export const photos: Photo[] = [
     lat: 60.02784316884682,  // TODO: add latitude
     lng: 6.538649028130602, // TODO: add longitude
   },
-  {
-    id: 'img-5044',
-    src: '/images/IMG_5044.jpg',
-    width: 2048,
-    height: 1365,
-    location: 'Arches National Park, USA', // TODO: add location
-    date: '2023-03', // TODO: add date
-    tags: ['nature', 'landscape'], // TODO: review tags
-    caption: 'Mesas Above the Clouds', // TODO: add caption
-    lat: 38.74407006460051, 
-    lng: -109.50091857592441,
-  },
   
   {
     id: 'do2a0504',
@@ -429,4 +417,16 @@ export const photos: Photo[] = [
     lng: 13.072901860055234, // TODO: add longitude
   },
  
+  {
+    id: 'do2a0616',
+    src: '/images/DO2A0616.jpg',
+    width: 1080,
+    height: 1620,
+    location: 'Trolltunga, Norway', // TODO: add location
+    date: '2026-06', // TODO: add date
+    tags: ['Nature', 'Landscape', 'Mountains'], // TODO: review tags
+    caption: 'Trolltunga', // TODO: add caption
+    lat: 60.13310648157943, // TODO: add latitude
+    lng: 6.754503896524241, // TODO: add longitude
+  },
 ];

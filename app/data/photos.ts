@@ -268,6 +268,18 @@ export const photos: Photo[] = [
     lng: -16.180477529077205
   },
   {
+    id: 'do2a0485',
+    src: '/images/DO2A0485.jpg',
+    width: 2048,
+    height: 1365,
+    location: 'Lofoten, Norway', // TODO: add location
+    date: '2026-06', // TODO: add date
+    tags: ['Nature', 'Landscape', 'Mountaints', 'Ocean'], // TODO: review tags
+    caption: 'Arctic Beaches', // TODO: add caption
+    lat: 68.08675433298993, // TODO: add latitude
+    lng: 13.093460586058564, // TODO: add longitude
+  },
+  {
     id: 'img-7355',
     src: '/images/IMG_7355.jpg',
     width: 3168,
@@ -326,6 +338,18 @@ export const photos: Photo[] = [
     caption: 'Station Road Bridge', // TODO: add caption
     lat: 41.323807370605174, 
     lng: -81.58704265711836, // TODO: add longitude
+  },
+   {
+    id: 'img-1314',
+    src: '/images/IMG_1314.jpg',
+    width: 2048,
+    height: 1536,
+    location: 'Folgefonna Glacier, Norway', // TODO: add location
+    date: '2026-06', // TODO: add date
+    tags: ['nature', 'glacier'], // TODO: review tags
+    caption: 'Glacier Team', // TODO: add caption
+    lat: 60.21225593191782, // TODO: add latitude
+    lng: 6.430994698054693, // TODO: add longitude
   },
   {
     id: 'img-7603',
@@ -391,4 +415,18 @@ export const photos: Photo[] = [
     lat: 38.74407006460051, 
     lng: -109.50091857592441,
   },
+  
+  {
+    id: 'do2a0504',
+    src: '/images/DO2A0504.jpg',
+    width: 2048,
+    height: 1365,
+    location: 'Lofoten, Norway', // TODO: add location
+    date: '2026-06', // TODO: add date
+    tags: ['Nature', 'Landscape', 'Mountains'], // TODO: review tags
+    caption: '2000 Step View', // TODO: add caption
+    lat: 67.92778886223601, // TODO: add latitude
+    lng: 13.072901860055234, // TODO: add longitude
+  },
+ 
 ];
